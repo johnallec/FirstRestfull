@@ -6,6 +6,11 @@ function GenericQuote(id,quote){
     this.quote=quote;
 }
 
+var errorQuote = {
+    id : -1,
+    quote : "No quote"
+}
+
 var quotes = [];
 var quotesPath = path.join(__dirname, '..', 'resources', 'piratesOfTheCaribbeanQuotes.txt');
 var quotesStrings = fs.readFileSync(quotesPath, 'utf8');
@@ -16,7 +21,9 @@ for(let i = 0; i < quotesStrings.length; ++i){
 }
 
 function getQuote(id) {
-    return quotes[id];
+    if(id < quotes.length)
+        return quotes[id];
+    return errorQuote;
 }
 
 function getLastQuote() {
